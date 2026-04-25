@@ -53,7 +53,7 @@ def signup_user():
             response = make_response({
                 'success': True, 'msg': 'new admin account created successfully'
             }, HTTPStatus.CREATED)
-            response.set_cookie("access_token", access_token, httponly=True, samesite='Lax')
+            response.set_cookie("access_token", access_token, httponly=True, samesite='None', secure=True)
             
             logger.info("new user %s account created", new_user.id)
             return response
@@ -88,7 +88,7 @@ def login_user():
             response = make_response({
                 'success': True, 'msg': 'login successful'
             }, HTTPStatus.OK)
-            response.set_cookie("access_token", access_token, httponly=True, samesite='Lax')
+            response.set_cookie("access_token", access_token, httponly=True, samesite='None', secure=True)
             
             return response
         
