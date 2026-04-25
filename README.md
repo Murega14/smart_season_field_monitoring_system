@@ -1,5 +1,3 @@
-Here is a professionally formatted Markdown section for your `README.md` that highlights the design choices and assumptions we established during the build. You can copy and paste this directly into your repository.
-
 ***
 
 ## 🧠 Design Decisions & Business Logic
