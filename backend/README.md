@@ -77,8 +77,8 @@ The API will be available at `http://localhost:8000`.
 
 | Role        | Email                      | Password      |
 |-------------|----------------------------|---------------|
-| Admin       | admin@example.com          | admin1234     |
-| Field Agent | agent@example.com          | agent1234     |
+| Admin       | admin@smartseason.com      | admin123      |
+| Field Agent | john.agent@smartseason.com | agent123      |
 
 ---
 
