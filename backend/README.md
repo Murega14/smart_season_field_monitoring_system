@@ -75,10 +75,10 @@ The API will be available at `http://localhost:8000`.
 > These are created by calling the `/api/v1/auth/signup` endpoint directly.
 > Field agent accounts are created by admins via the assign-agent endpoint.
 
-| Role        | Email                 | Password      |
-|-------------|----------------------|---------------|
-| Admin       | admin@example.com    | admin1234     |
-| Field Agent | agent@example.com    | agent1234     |
+| Role        | Email                      | Password      |
+|-------------|----------------------------|---------------|
+| Admin       | admin@example.com          | admin1234     |
+| Field Agent | agent@example.com          | agent1234     |
 
 ---
 
@@ -99,11 +99,9 @@ Tokens expire after **12 hours**.
 ### Auth
 
 #### `POST /auth/signup`
-
 Creates a new admin account.
 
 **Request body:**
-
 ```json
 {
   "first_name": "Jane",
@@ -111,10 +109,9 @@ Creates a new admin account.
   "email": "jane@example.com",
   "password": "securepassword"
 }
-```bash
+```
 
 **Responses:**
-
 | Status | Description |
 |--------|-------------|
 | `201`  | Account created, access token cookie set |
@@ -124,20 +121,17 @@ Creates a new admin account.
 ---
 
 #### `POST /auth/login`
-
 Authenticates a user and sets the access token cookie.
 
 **Request body:**
-
 ```json
 {
   "email": "jane@example.com",
   "password": "securepassword"
 }
-```bash
+```
 
 **Responses:**
-
 | Status | Description |
 |--------|-------------|
 | `200`  | Login successful, access token cookie set |
@@ -146,13 +140,11 @@ Authenticates a user and sets the access token cookie.
 ---
 
 #### `POST /auth/logout`
-
 Clears the access token cookie and unsets JWT cookies.
 
 **Auth required:** Yes
 
 **Responses:**
-
 | Status | Description |
 |--------|-------------|
 | `200`  | Logged out successfully |
@@ -160,21 +152,18 @@ Clears the access token cookie and unsets JWT cookies.
 ---
 
 #### `POST /auth/forgot-password`
-
 Sends a password reset link to the provided email if an account exists.
 
 > Always returns `200` regardless of whether the email exists, to prevent account enumeration.
 
 **Request body:**
-
 ```json
 {
   "email": "jane@example.com"
 }
-```bash
+```
 
 **Responses:**
-
 | Status | Description |
 |--------|-------------|
 | `200`  | Reset link sent (if account exists) |
@@ -183,21 +172,18 @@ Sends a password reset link to the provided email if an account exists.
 ---
 
 #### `POST /auth/reset-password/:token`
-
 Resets a user's password using a valid reset token.
 
 Reset tokens expire in **~8 minutes**.
 
 **Request body:**
-
 ```json
 {
   "password": "newpassword123"
 }
-```bash
+```
 
 **Responses:**
-
 | Status | Description |
 |--------|-------------|
 | `200`  | Password reset successfully |
@@ -212,7 +198,6 @@ All field endpoints require authentication. Role-based access is enforced per en
 ---
 
 #### `GET /fields/dashboard`
-
 Returns a summary of fields and key insights for the authenticated user.
 
 - **Admin** sees fields they created.
@@ -221,7 +206,6 @@ Returns a summary of fields and key insights for the authenticated user.
 **Auth required:** Yes (any role)
 
 **Response:**
-
 ```json
 {
   "success": true,
@@ -240,18 +224,16 @@ Returns a summary of fields and key insights for the authenticated user.
     }
   }
 }
-```bash
+```
 
 ---
 
 #### `GET /fields/agents`
-
 Returns a list of all field agents. Used to populate agent selection dropdowns when assigning or reassigning fields.
 
 **Auth required:** Yes — **Admin only**
 
 **Response:**
-
 ```json
 {
   "success": true,
@@ -265,12 +247,11 @@ Returns a list of all field agents. Used to populate agent selection dropdowns w
     }
   ]
 }
-```bash
+```
 
 ---
 
 #### `GET /fields/`
-
 Returns all fields belonging to the authenticated user.
 
 - **Admin** sees fields they created.
@@ -279,7 +260,6 @@ Returns all fields belonging to the authenticated user.
 **Auth required:** Yes (any role)
 
 **Response:**
-
 ```json
 {
   "success": true,
@@ -298,18 +278,16 @@ Returns all fields belonging to the authenticated user.
     }
   ]
 }
-```bash
+```
 
 ---
 
 #### `POST /fields/create`
-
 Creates a new field.
 
 **Auth required:** Yes — **Admin only**
 
 **Request body:**
-
 ```json
 {
   "name": "South Block",
@@ -319,14 +297,13 @@ Creates a new field.
   "expected_harvest_year": 2025,
   "current_stage": "planted"
 }
-```bash
+```
 
 > `planting_date` must be in `DD-MM-YYYY` format.
 > `expected_harvest_month` accepts full month names (`january`) or abbreviations (`jan`).
 > `current_stage` must be one of: `planted`, `growing`, `ready`, `harvested`.
 
 **Responses:**
-
 | Status | Description |
 |--------|-------------|
 | `201`  | Field created successfully |
@@ -335,7 +312,6 @@ Creates a new field.
 ---
 
 #### `GET /fields/:field_id`
-
 Returns full detail for a single field.
 
 - Admins can only fetch fields they created.
@@ -344,7 +320,6 @@ Returns full detail for a single field.
 **Auth required:** Yes (any role)
 
 **Response:**
-
 ```json
 {
   "success": true,
@@ -363,10 +338,9 @@ Returns full detail for a single field.
     "updated_at": "2025-03-01T12:00:00+00:00"
   }
 }
-```bash
+```
 
 **Responses:**
-
 | Status | Description |
 |--------|-------------|
 | `200`  | Field detail returned |
@@ -376,13 +350,11 @@ Returns full detail for a single field.
 ---
 
 #### `PATCH /fields/:field_id/edit`
-
 Updates a field's metadata. Only the admin who created the field can edit it. All fields are optional — only include what needs to change.
 
 **Auth required:** Yes — **Admin only**
 
 **Request body (all fields optional):**
-
 ```json
 {
   "name": "Updated Name",
@@ -391,10 +363,9 @@ Updates a field's metadata. Only the admin who created the field can edit it. Al
   "expected_harvest_month": "august",
   "expected_harvest_year": 2025
 }
-```bash
+```
 
 **Responses:**
-
 | Status | Description |
 |--------|-------------|
 | `200`  | Field updated successfully |
@@ -405,25 +376,22 @@ Updates a field's metadata. Only the admin who created the field can edit it. Al
 ---
 
 #### `PATCH /fields/:field_id`
-
 Allows a field agent to update the stage of their assigned field and add notes.
 
 **Auth required:** Yes — **Field Agent only**
 
 **Request body:**
-
 ```json
 {
   "new_stage": "growing",
   "notes": "Crop is developing well, no pest activity observed."
 }
-```bash
+```
 
 > `new_stage` is optional. If omitted, a log entry is created with the current stage and only the notes are recorded.
 > `new_stage` must be one of: `planted`, `growing`, `ready`, `harvested`.
 
 **Responses:**
-
 | Status | Description |
 |--------|-------------|
 | `200`  | Field updated and update log created |
@@ -434,7 +402,6 @@ Allows a field agent to update the stage of their assigned field and add notes.
 ---
 
 #### `POST /fields/:field_id/assign-agent`
-
 Assigns a field agent to a field. Supports two flows:
 
 1. **Assign an existing agent** — provide `agent_id`.
@@ -445,25 +412,22 @@ Only the admin who created the field can assign agents to it.
 **Auth required:** Yes — **Admin only**
 
 **Request body (existing agent):**
-
 ```json
 {
   "agent_id": "uuid"
 }
-```bash
+```
 
 **Request body (new agent):**
-
 ```json
 {
   "first_name": "John",
   "last_name": "Kamau",
   "email": "john@example.com"
 }
-```bash
+```
 
 **Responses:**
-
 | Status | Description |
 |--------|-------------|
 | `200`  | Existing agent assigned to field |
@@ -476,21 +440,18 @@ Only the admin who created the field can assign agents to it.
 ---
 
 #### `PATCH /fields/:field_id/reassign`
-
 Reassigns a field to a different existing field agent.
 
 **Auth required:** Yes — **Admin only**
 
 **Request body:**
-
 ```json
 {
   "new_agent_id": "uuid"
 }
-```bash
+```
 
 **Responses:**
-
 | Status | Description |
 |--------|-------------|
 | `200`  | Field reassigned successfully |
@@ -500,7 +461,6 @@ Reassigns a field to a different existing field agent.
 ---
 
 #### `GET /fields/:field_id/updates`
-
 Returns the update history for a field, ordered from most recent to oldest.
 
 - Admins can view updates for fields they created.
@@ -509,7 +469,6 @@ Returns the update history for a field, ordered from most recent to oldest.
 **Auth required:** Yes (any role)
 
 **Response:**
-
 ```json
 {
   "success": true,
@@ -523,10 +482,9 @@ Returns the update history for a field, ordered from most recent to oldest.
     }
   ]
 }
-```bash
+```
 
 **Responses:**
-
 | Status | Description |
 |--------|-------------|
 | `200`  | Update history returned |
@@ -536,13 +494,11 @@ Returns the update history for a field, ordered from most recent to oldest.
 ---
 
 #### `DELETE /fields/:field_id`
-
 Permanently deletes a field and all its associated update records.
 
 **Auth required:** Yes — **Admin only**
 
 **Responses:**
-
 | Status | Description |
 |--------|-------------|
 | `200`  | Field deleted successfully |
@@ -564,21 +520,21 @@ Each field has a computed `status` property derived from its data:
 
 ## Endpoint Summary
 
-| Method | Endpoint                           | Role        | Description                     |
-|--------|------------------------------------|-------------|---------------------------------|
-| POST   | /auth/signup                       | Public      | Create admin account            |
-| POST   | /auth/login                        | Public      | Login                           |
-| POST   | /auth/logout                       | Any         | Logout                          |
-| POST   | /auth/forgot-password              | Public      | Request password reset email    |
-| POST   | /auth/reset-password/:token        | Public      | Reset password with token       |
-| GET    | /fields/dashboard                  | Any         | Dashboard stats and insights    |
-| GET    | /fields/agents                     | Admin       | List all field agents           |
-| GET    | /fields/                           | Any         | List own fields                 |
-| POST   | /fields/create                     | Admin       | Create a new field              |
-| GET    | /fields/:field_id                  | Any         | Get single field detail         |
-| PATCH  | /fields/:field_id/edit             | Admin       | Edit field metadata             |
-| PATCH  | /fields/:field_id                  | Field Agent | Update field stage / add notes  |
-| POST   | /fields/:field_id/assign-agent     | Admin       | Assign or create and assign     |
-| PATCH  | /fields/:field_id/reassign         | Admin       | Reassign field to another agent |
-| GET    | /fields/:field_id/updates          | Any         | View field update history       |
-| DELETE | /fields/:field_id                  | Admin       | Delete a field                  |
+| Method   | Endpoint                              | Role         | Description                        |
+|----------|---------------------------------------|--------------|------------------------------------|
+| `POST`   | `/auth/signup`                        | Public       | Create admin account               |
+| `POST`   | `/auth/login`                         | Public       | Login                              |
+| `POST`   | `/auth/logout`                        | Any          | Logout                             |
+| `POST`   | `/auth/forgot-password`               | Public       | Request password reset email       |
+| `POST`   | `/auth/reset-password/:token`         | Public       | Reset password with token          |
+| `GET`    | `/fields/dashboard`                   | Any          | Dashboard stats and insights       |
+| `GET`    | `/fields/agents`                      | Admin        | List all field agents              |
+| `GET`    | `/fields/`                            | Any          | List own fields                    |
+| `POST`   | `/fields/create`                      | Admin        | Create a new field                 |
+| `GET`    | `/fields/:field_id`                   | Any          | Get single field detail            |
+| `PATCH`  | `/fields/:field_id/edit`              | Admin        | Edit field metadata                |
+| `PATCH`  | `/fields/:field_id`                   | Field Agent  | Update field stage / add notes     |
+| `POST`   | `/fields/:field_id/assign-agent`      | Admin        | Assign or create and assign agent  |
+| `PATCH`  | `/fields/:field_id/reassign`          | Admin        | Reassign field to another agent    |
+| `GET`    | `/fields/:field_id/updates`           | Any          | View field update history          |
+| `DELETE` | `/fields/:field_id`                   | Admin        | Delete a field                     |
