@@ -38,9 +38,9 @@ export default function DashboardPage() {
     const loadData = async () => {
       try {
         const [statsRes, fieldsRes, agentsRes] = await Promise.all([
-          fetch('http://localhost:5000/api/v1/fields/dashboard', { credentials: 'include' }),
-          fetch('http://localhost:5000/api/v1/fields/', { credentials: 'include' }),
-          fetch('http://localhost:5000/api/v1/fields/agents', { credentials: 'include' }) 
+          fetch('https://smart-season-field-monitoring-system-lgto.onrender.com/api/v1/fields/dashboard', { credentials: 'include' }),
+          fetch('https://smart-season-field-monitoring-system-lgto.onrender.com/api/v1/fields/', { credentials: 'include' }),
+          fetch('https://smart-season-field-monitoring-system-lgto.onrender.com/api/v1/fields/agents', { credentials: 'include' }) 
         ]);
 
         if (statsRes.status === 401 || fieldsRes.status === 401) {
@@ -84,7 +84,7 @@ export default function DashboardPage() {
     e.preventDefault();
     setActionLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/v1/fields/create', {
+      const res = await fetch('https://smart-season-field-monitoring-system-lgto.onrender.com/api/v1/fields/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -111,7 +111,7 @@ export default function DashboardPage() {
         expected_harvest_year: parseInt(editField.expected_harvest_year)
       };
 
-      const res = await fetch(`http://localhost:5000/api/v1/fields/${manageModal.field.id}/edit`, {
+      const res = await fetch(`https://smart-season-field-monitoring-system-lgto.onrender.com/api/v1/fields/${manageModal.field.id}/edit`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -153,7 +153,7 @@ export default function DashboardPage() {
         };
       }
 
-      const res = await fetch(`http://localhost:5000${endpoint}`, {
+      const res = await fetch(`https://smart-season-field-monitoring-system-lgto.onrender.com${endpoint}`, {
         method: method,
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -173,7 +173,7 @@ export default function DashboardPage() {
     if (!confirm(`Are you sure you want to delete ${manageModal.field.name}? This action cannot be undone.`)) return;
     setActionLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/v1/fields/${manageModal.field.id}`, {
+      const res = await fetch(`https://smart-season-field-monitoring-system-lgto.onrender.com/api/v1/fields/${manageModal.field.id}`, {
         method: 'DELETE',
         credentials: 'include'
       });
@@ -189,7 +189,7 @@ export default function DashboardPage() {
     e.preventDefault();
     setActionLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/v1/fields/${updateModal.field.id}`, {
+      const res = await fetch(`https://smart-season-field-monitoring-system-lgto.onrender.com/api/v1/fields/${updateModal.field.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -208,7 +208,7 @@ export default function DashboardPage() {
   const handleViewHistory = async (field) => {
     setHistoryModal({ isOpen: true, field, updates: [], loading: true });
     try {
-      const res = await fetch(`http://localhost:5000/api/v1/fields/${field.id}/updates`, { credentials: 'include' });
+      const res = await fetch(`https://smart-season-field-monitoring-system-lgto.onrender.com/api/v1/fields/${field.id}/updates`, { credentials: 'include' });
       const data = await res.json();
       if (res.ok) {
         setHistoryModal({ isOpen: true, field, updates: data.updates, loading: false });
@@ -221,7 +221,7 @@ export default function DashboardPage() {
 
   const handleLogout = async () => {
     try {
-      await fetch('http://localhost:5000/api/v1/auth/logout', { method: 'POST', credentials: 'include' });
+      await fetch('https://smart-season-field-monitoring-system-lgto.onrender.com/api/v1/auth/logout', { method: 'POST', credentials: 'include' });
       router.push('/auth');
     } catch (err) { console.error("Logout failed"); }
   };

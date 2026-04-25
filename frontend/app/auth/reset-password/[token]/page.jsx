@@ -32,7 +32,7 @@ export default function ResetPasswordPage({ params }) {
     setErrorMsg('');
 
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/auth/reset-password/${token}`, {
+      const response = await fetch(`https://smart-season-field-monitoring-system-lgto.onrender.com/api/v1/auth/reset-password/${token}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password }),

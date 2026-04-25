@@ -40,7 +40,7 @@ export default function AuthPage() {
             };
 
         try {
-            const response = await fetch(`http://localhost:5000${endpoint}`, {
+            const response = await fetch(`https://smart-season-field-monitoring-system-lgto.onrender.com${endpoint}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -18,7 +18,7 @@ export default function ForgotPasswordPage() {
     setMessage('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/v1/auth/forgot-password', {
+      const response = await fetch('https://smart-season-field-monitoring-system-lgto.onrender.com/api/v1/auth/forgot-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
