@@ -24,7 +24,7 @@ def create_app():
         app,
         resources={
             r"/api/*": {
-                "origins": ["http://localhost:3000", "http://127.0.0.1:5000"],
+                "origins": ["http://localhost:3000", "http://127.0.0.1:5000", "https://smart-season-field-monitoring-syste-phi.vercel.app"],
                 "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
                 "allow_headers": ["Content-Type", "Authorization", "X-Requested-With"],
                 "expose_headers": [

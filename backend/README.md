@@ -19,7 +19,7 @@ A REST API built with Flask for tracking crop progress across multiple fields du
 ```bash
 git clone <repository-url>
 cd <repository-folder>
-```bash
+```
 
 ### 2. Create and activate a virtual environment
 
@@ -27,13 +27,13 @@ cd <repository-folder>
 python -m venv venv
 source venv/bin/activate        # macOS/Linux
 venv\Scripts\activate           # Windows
-```bash
+```
 
 ### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
-```bash
+```
 
 ### 4. Configure environment variables
 
@@ -50,7 +50,7 @@ JWT_SECRET_KEY=your-jwt-secret-key
 
 RESEND_API_KEY=your-resend-api-key
 FRONTEND_URL=http://localhost:3000
-```bash
+```
 
 ### 5. Set up the database
 
@@ -58,13 +58,13 @@ FRONTEND_URL=http://localhost:3000
 flask db init
 flask db migrate -m "initial migration"
 flask db upgrade
-```bash
+```
 
 ### 6. Run the development server
 
 ```bash
 python app.py
-```bash
+```
 
 The API will be available at `http://localhost:8000`.
 
