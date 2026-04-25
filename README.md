@@ -1,7 +1,7 @@
 
 # Design Decisions & Business Logic
 
-[cite_start]To ensure the SmartSeason Field Monitoring System remains robust, intuitive, and aligned with standard agricultural practices, the following architectural and design decisions were implemented:
+To ensure the SmartSeason Field Monitoring System remains robust, intuitive, and aligned with standard agricultural practices, the following architectural and design decisions were implemented:
 
 ## 1. Harvest Targeting (Month/Year vs. Exact Date)
 
