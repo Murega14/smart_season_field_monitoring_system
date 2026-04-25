@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  /* Defining colors here automatically creates classes like bg-smart-dark, text-smart-medium, etc. */
+  --color-smart-dark: #1F6F5F;
+  --color-smart-medium: #2FA084;
+  --color-smart-light: #6FCF97;
+  --color-smart-bg: #EEEEEE;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-smart-bg);
+    color: var(--color-smart-dark);
+  }
+
+  /* Custom selection color */
+  ::selection {
+    background-color: var(--color-smart-light);
+    color: var(--color-smart-dark);
+  }
+}

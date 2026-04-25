@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [$# -eq 0]; then
+    echo "Usage ./install_package <package_name1> [package_name2 ...]"
+    exit 1
+fi
+
+echo "installing packages: $@"
+pip install "$@"
+
+if [ $? -ne 0 ]; then
+    echo "Failed to install $1"
+    exit 1
+fi
+
+echo "Updating requirements.txt..."
+pip freeze > requirements.txt
+
+echo "successfully installed: $@ and updated requirements.txt updated"
